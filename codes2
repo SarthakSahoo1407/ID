@@ -1,0 +1,708 @@
+desc Instructor;
+desc Course;
+desc Prereq;
+desc Department;
+desc teaches;
+
+select * from Instructor;
+select * from Course;
+select * from Prereq;
+select * from Department;
+select * from teaches;
+
+select name, dept_name from instructor;
+
+select name, salary from instructor where dept_name = 'Comp. Sci.';
+
+select * from instructor where dept_name = 'Physics' and salary < 90000;
+
+select name from instructor where not dept_name = 'Comp. Sci.';
+
+select distinct dept_name from instructor;
+
+select course_id from teaches where year = 2009 and not semester ='Spring';
+
+select title from course where dept_name='Comp. Sci. ' and not credits= 3;
+
+select * from course order by dept_name desc;
+
+alter table Instructor add date_of_join date;
+
+update Instructor set date_of_join = to_date('2007-01-1', 'YYYY-MM-DD') where id = 10101;
+update Instructor set date_of_join = to_date('2007-02-1', 'YYYY-MM-DD') where id = 12121;
+update Instructor set date_of_join = to_date('2007-03-1', 'YYYY-MM-DD') where id = 15151;
+update Instructor set date_of_join = to_date('2007-04-1', 'YYYY-MM-DD') where id = 22222;
+update Instructor set date_of_join = to_date('2007-05-1', 'YYYY-MM-DD') where id = 32343;
+update Instructor set date_of_join = to_date('2007-06-1', 'YYYY-MM-DD') where id = 33456;
+update Instructor set date_of_join = to_date('2007-07-1', 'YYYY-MM-DD') where id = 45565;
+update Instructor set date_of_join = to_date('2007-08-1', 'YYYY-MM-DD') where id = 58583;
+update Instructor set date_of_join = to_date('2007-09-1', 'YYYY-MM-DD') where id = 76543;
+update Instructor set date_of_join = to_date('2007-10-1', 'YYYY-MM-DD') where id = 76766;
+update Instructor set date_of_join = to_date('2007-11-1', 'YYYY-MM-DD') where id = 83821;
+update Instructor set date_of_join = to_date('2007-12-1', 'YYYY-MM-DD') where id = 98345;
+
+alter table instructor rename column dept_name to department;
+alter table course rename column dept_name to department;
+alter table department rename column dept_name to department;
+
+alter table prereq rename column prerequired to prereq_id;
+
+alter table course rename column course_id to sub_code;
+alter table prereq rename column course_id to sub_code;
+alter table teaches rename column course_id to sub_code;
+
+alter table Instructor modify name varchar2(50);
+
+rename instructor to Faculty_info;
+
+alter table Course modify sub_code varchar2(8);
+
+alter table prereq drop column prerequired;
+
+alter table department rename column building to builder;
+
+
+SQL> select * from Instructor;
+
+	ID NAME 			  DEPT_NAME		   SALARY
+---------- ------------------------------ -------------------- ----------
+DATE_OF_J
+---------
+     10101 Srinivasan			  Comp. Sci.		    65000
+01-JAN-07
+
+     12121 Wu				  Finance		    90000
+01-FEB-07
+
+     15151 Mozart			  Music 		    40000
+01-MAR-07
+
+
+	ID NAME 			  DEPT_NAME		   SALARY
+---------- ------------------------------ -------------------- ----------
+DATE_OF_J
+---------
+     22222 Einstein			  Physics		    95000
+01-APR-07
+
+     32343 El Said			  History		    60000
+01-MAY-07
+
+     33456 Gold 			  Physics		    87000
+01-JUN-07
+
+
+	ID NAME 			  DEPT_NAME		   SALARY
+---------- ------------------------------ -------------------- ----------
+DATE_OF_J
+---------
+     45565 Katz 			  Comp. Sci.		    75000
+01-JUL-07
+
+     58583 Califier			  History		    62000
+01-AUG-07
+
+     76543 Singh			  Finance		    80000
+01-SEP-07
+
+
+	ID NAME 			  DEPT_NAME		   SALARY
+---------- ------------------------------ -------------------- ----------
+DATE_OF_J
+---------
+     76766 Crick			  Biology		    72000
+01-OCT-07
+
+     83821 Brandt			  Comp. Sci.		    92000
+01-NOV-07
+
+     98345 Kim				  Elec. Eng.		    80000
+01-DEC-07
+
+
+12 rows selected.
+
+SQL> alter table instructor change column dept_name department department varchar2(20);
+alter table course change column dept_name department department varchar2(20);
+alter table department change column dept_name department department varchar2(20);alter table instructor change column dept_name department department varchar2(20)
+                       *
+ERROR at line 1:
+ORA-01735: invalid ALTER TABLE option
+
+
+SQL> alter table course change column dept_name department department varchar2(20)
+                   *
+ERROR at line 1:
+ORA-01735: invalid ALTER TABLE option
+
+
+SQL> alter table instructor rename column dept_name department department varchar2(20);
+alter table department change column dept_name department department varchar2(20);alter table instructor rename column dept_name department department varchar2(20)
+                       *
+ERROR at line 1:
+ORA-01735: invalid ALTER TABLE option
+
+
+SQL> alter table instructor rename column dept_name to department varchar2(20);
+alter table instructor rename column dept_name to department varchar2(20)
+*
+ERROR at line 1:
+ORA-23290: This operation may not be combined with any other operation
+
+
+SQL> alter table instructor rename column dept_name to department;
+
+Table altered.
+
+SQL> alter table course rename column dept_name to department;
+alter table department rename column dept_name to department;
+Table altered.
+
+SQL> desc instructor;
+alter table department rename column dept_name to department;desc instructor
+                                                            *
+ERROR at line 1:
+ORA-00911: invalid character
+
+
+SQL> desc instructor;
+ Name					   Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ ID						    NUMBER(5)
+ NAME						    VARCHAR2(30)
+ DEPARTMENT					    VARCHAR2(20)
+ SALARY 					    NUMBER(6)
+ DATE_OF_JOIN					    DATE
+
+SQL> desc course;
+ Name					   Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ COURSE_ID					    VARCHAR2(10)
+ TITLE						    VARCHAR2(30)
+ DEPARTMENT					    VARCHAR2(20)
+ CREDITS					    NUMBER(2)
+
+SQL> desc department
+ Name					   Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ DEPT_NAME					    VARCHAR2(20)
+ BUILDING					    VARCHAR2(20)
+ BUDGET 					    NUMBER(10)
+
+SQL> /    
+alter table department rename column dept_name to department;desc instructor
+                                                            *
+ERROR at line 1:
+ORA-00911: invalid character
+
+
+SQL> \
+SP2-0042: unknown command "\" - rest of line ignored.
+SQL> 	alter table department rename column dept_name to department;
+
+Table altered.
+
+SQL> desc department;
+ Name					   Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ DEPARTMENT					    VARCHAR2(20)
+ BUILDING					    VARCHAR2(20)
+ BUDGET 					    NUMBER(10)
+
+SQL> alter table prereq rename column pre_require to prerequired;
+alter table prereq rename column pre_require to prerequired
+                                 *
+ERROR at line 1:
+ORA-00904: "PRE_REQUIRE": invalid identifier
+
+
+SQL> alter table prereq rename column pre_req to prerequired;
+alter table prereq rename column pre_req to prerequired
+                                 *
+ERROR at line 1:
+ORA-00904: "PRE_REQ": invalid identifier
+
+
+SQL> alter table prereq rename column prereq_id to prerequired;
+
+Table altered.
+
+SQL> desc prereq
+ Name					   Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ COURSE_ID					    VARCHAR2(10)
+ PREREQUIRED					    VARCHAR2(10)
+
+SQL> alter table course rename column course_id to sub_code;
+alter table prereq rename column course_id to sub_code;
+alter table teaches rename column course_id to sub_code;
+
+Table altered.
+
+SQL> 
+Table altered.
+
+SQL> 
+Table altered.
+
+SQL> desc coursel
+ERROR:
+ORA-04043: object coursel does not exist
+
+
+SQL> desc course;
+ Name					   Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ SUB_CODE					    VARCHAR2(10)
+ TITLE						    VARCHAR2(30)
+ DEPARTMENT					    VARCHAR2(20)
+ CREDITS					    NUMBER(2)
+
+SQL> desc prereq;
+ Name					   Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ SUB_CODE					    VARCHAR2(10)
+ PREREQUIRED					    VARCHAR2(10)
+
+SQL> desc teaches;
+ Name					   Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ ID						    NUMBER(5)
+ SUB_CODE					    VARCHAR2(10)
+ SEC_ID 					    NUMBER(2)
+ SEMESTER					    VARCHAR2(10)
+ YEAR						    NUMBER(4)
+
+SQL> alter table Instructor alter column name varchar(20);
+alter table Instructor alter column name varchar(20)
+                       *
+ERROR at line 1:
+ORA-01735: invalid ALTER TABLE option
+
+
+SQL> alter table Instructor modify name varchar2(50);
+
+Table altered.
+
+SQL> desc Instructor;
+ Name					   Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ ID						    NUMBER(5)
+ NAME						    VARCHAR2(50)
+ DEPARTMENT					    VARCHAR2(20)
+ SALARY 					    NUMBER(6)
+ DATE_OF_JOIN					    DATE
+
+SQL> rename instructor to Faculty_info;
+
+Table renamed.
+
+SQL> desc faculty_info;
+ Name					   Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ ID						    NUMBER(5)
+ NAME						    VARCHAR2(50)
+ DEPARTMENT					    VARCHAR2(20)
+ SALARY 					    NUMBER(6)
+ DATE_OF_JOIN					    DATE
+
+SQL> create table date_joined (date_of_join date);
+
+Table created.
+
+SQL> insert into date_joined(date_of_join) values (2024_02_12);
+insert into date_joined(date_of_join) values (2024_02_12)
+                                                  *
+ERROR at line 1:
+ORA-00911: invalid character
+
+
+SQL> /   
+insert into date_joined(date_of_join) values (2024_02_12)
+                                                  *
+ERROR at line 1:
+ORA-00911: invalid character
+
+
+SQL> insert into date_joined(date_of_join) values (2024-02-12);
+insert into date_joined(date_of_join) values (2024-02-12)
+                                                     *
+ERROR at line 1:
+ORA-00932: inconsistent datatypes: expected DATE got NUMBER
+
+
+SQL> insert into date_joined(date_of_join) values ('2024-12-12'); 
+insert into date_joined(date_of_join) values ('2024-12-12')
+                                              *
+ERROR at line 1:
+ORA-01861: literal does not match format string
+
+
+SQL> insert into date_joined(date_of_join) values ('2024-MAR-12')
+  2  ;
+insert into date_joined(date_of_join) values ('2024-MAR-12')
+                                              *
+ERROR at line 1:
+ORA-01861: literal does not match format string
+
+
+SQL> insert into date_joined(date_of_join) values ('12-MAR-2012')
+  2  ;
+
+1 row created.
+
+Commit complete.
+SQL> insert into date_joined(date_of_join) values ('12-03-2012')
+  2  ;
+insert into date_joined(date_of_join) values ('12-03-2012')
+                                              *
+ERROR at line 1:
+ORA-01843: not a valid month
+
+
+SQL> alter table Course modify course_id number(8);
+alter table Course modify course_id number(8)
+                          *
+ERROR at line 1:
+ORA-00904: "COURSE_ID": invalid identifier
+
+
+SQL> desc course;
+ Name					   Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ SUB_CODE					    VARCHAR2(10)
+ TITLE						    VARCHAR2(30)
+ DEPARTMENT					    VARCHAR2(20)
+ CREDITS					    NUMBER(2)
+
+SQL> alter table Course modify sub_code number(8);
+alter table Course modify sub_code number(8)
+                          *
+ERROR at line 1:
+ORA-01439: column to be modified must be empty to change datatype
+
+
+SQL> select * from course;
+
+SUB_CODE   TITLE			  DEPARTMENT		  CREDITS
+---------- ------------------------------ -------------------- ----------
+BIO-101    Intro to Biology		  Biology			4
+BIO-301    Genetics			  Biology			4
+BIO-399    Computational Biology	  Biology			3
+CS-101	   Intro. to Computer Science	  Comp. Sci.			4
+CS-315	   Robotics			  Comp. Sci.			3
+CS-190	   Game Design			  Comp. Sci.			4
+CS-347	   Image Processing		  Comp. Sci.			3
+EE-181	   Intro. to Digital System	  Elec. Eng.			3
+FIN-201    Investment Banking		  Finance			3
+HIS-351    World History		  Finance			3
+PHY-101    Physical Principles		  Physics			4
+
+SUB_CODE   TITLE			  DEPARTMENT		  CREDITS
+---------- ------------------------------ -------------------- ----------
+MU-199	   Music Video Production	  Music 			3
+
+12 rows selected.
+
+SQL> alter table Course modify sub_code varchar2(8);
+
+Table altered.
+
+SQL> desc course;
+ Name					   Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ SUB_CODE					    VARCHAR2(8)
+ TITLE						    VARCHAR2(30)
+ DEPARTMENT					    VARCHAR2(20)
+ CREDITS					    NUMBER(2)
+
+SQL> alter table prereq drop column prerequired; 
+
+Table altered.
+
+SQL> desc prereq;
+ Name					   Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ SUB_CODE					    VARCHAR2(10)
+
+SQL> desc departmentl
+ERROR:
+ORA-04043: object departmentl does not exist
+
+
+SQL> desc department;
+ Name					   Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ DEPARTMENT					    VARCHAR2(20)
+ BUILDING					    VARCHAR2(20)
+ BUDGET 					    NUMBER(10)
+
+SQL> alter table prereq rename column prerequired to prereq_id;
+alter table prereq rename column prerequired to prereq_id
+                                 *
+ERROR at line 1:
+ORA-00904: "PREREQUIRED": invalid identifier
+
+
+SQL> rename prereq to prerequired;
+
+Table renamed.
+
+SQL> desc prerequired;
+ Name					   Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ SUB_CODE					    VARCHAR2(10)
+
+SQL> alter table department rename column builing to builder;
+alter table department rename column builing to builder
+                                     *
+ERROR at line 1:
+ORA-00904: "BUILING": invalid identifier
+
+
+SQL> alter table department rename column building to builder;
+
+Table altered.
+
+SQL> desc department;
+ Name					   Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ DEPARTMENT					    VARCHAR2(20)
+ BUILDER					    VARCHAR2(20)
+ BUDGET 					    NUMBER(10)
+
+SQL> desc faculty_info;
+ Name					   Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ ID						    NUMBER(5)
+ NAME						    VARCHAR2(50)
+ DEPARTMENT					    VARCHAR2(20)
+ SALARY 					    NUMBER(6)
+ DATE_OF_JOIN					    DATE
+
+SQL> desc course;
+ Name					   Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ SUB_CODE					    VARCHAR2(8)
+ TITLE						    VARCHAR2(30)
+ DEPARTMENT					    VARCHAR2(20)
+ CREDITS					    NUMBER(2)
+
+SQL> select sub_code, title, credits from course
+  2  where department in (     
+  3  'Physics','
+  4  Music', 'Finance', 'Biology');
+
+SUB_CODE TITLE				   CREDITS
+-------- ------------------------------ ----------
+BIO-101  Intro to Biology			 4
+BIO-301  Genetics				 4
+BIO-399  Computational Biology			 3
+FIN-201  Investment Banking			 3
+HIS-351  World History				 3
+PHY-101  Physical Principles			 4
+
+6 rows selected.
+
+SQL> select * from Course;
+
+SUB_CODE TITLE				DEPARTMENT		CREDITS
+-------- ------------------------------ -------------------- ----------
+BIO-101  Intro to Biology		Biology 		      4
+BIO-301  Genetics			Biology 		      4
+BIO-399  Computational Biology		Biology 		      3
+CS-101	 Intro. to Computer Science	Comp. Sci.		      4
+CS-315	 Robotics			Comp. Sci.		      3
+CS-190	 Game Design			Comp. Sci.		      4
+CS-347	 Image Processing		Comp. Sci.		      3
+EE-181	 Intro. to Digital System	Elec. Eng.		      3
+FIN-201  Investment Banking		Finance 		      3
+HIS-351  World History			Finance 		      3
+PHY-101  Physical Principles		Physics 		      4
+
+SUB_CODE TITLE				DEPARTMENT		CREDITS
+-------- ------------------------------ -------------------- ----------
+MU-199	 Music Video Production 	Music			      3
+
+12 rows selected.
+
+SQL> select name from Faculty_info 
+  2  where name like 'K%' and salary > 65000;
+
+NAME
+--------------------------------------------------
+Katz
+Kim
+
+SQL> select * from faculty_Name;
+select * from faculty_Name
+              *
+ERROR at line 1:
+ORA-00942: table or view does not exist
+
+
+SQL> select * from faculty_info;
+
+	ID NAME
+---------- --------------------------------------------------
+DEPARTMENT		 SALARY DATE_OF_J
+-------------------- ---------- ---------
+     10101 Srinivasan
+Comp. Sci.		  65000 01-JAN-07
+
+     12121 Wu
+Finance 		  90000 01-FEB-07
+
+     15151 Mozart
+Music			  40000 01-MAR-07
+
+
+	ID NAME
+---------- --------------------------------------------------
+DEPARTMENT		 SALARY DATE_OF_J
+-------------------- ---------- ---------
+     22222 Einstein
+Physics 		  95000 01-APR-07
+
+     32343 El Said
+History 		  60000 01-MAY-07
+
+     33456 Gold
+Physics 		  87000 01-JUN-07
+
+
+	ID NAME
+---------- --------------------------------------------------
+DEPARTMENT		 SALARY DATE_OF_J
+-------------------- ---------- ---------
+     45565 Katz
+Comp. Sci.		  75000 01-JUL-07
+
+     58583 Califier
+History 		  62000 01-AUG-07
+
+     76543 Singh
+Finance 		  80000 01-SEP-07
+
+
+	ID NAME
+---------- --------------------------------------------------
+DEPARTMENT		 SALARY DATE_OF_J
+-------------------- ---------- ---------
+     76766 Crick
+Biology 		  72000 01-OCT-07
+
+     83821 Brandt
+Comp. Sci.		  92000 01-NOV-07
+
+     98345 Kim
+Elec. Eng.		  80000 01-DEC-07
+
+
+12 rows selected.
+
+SQL> select * from faculty_info
+  2  where salary between 60000 and 80000;
+
+	ID NAME
+---------- --------------------------------------------------
+DEPARTMENT		 SALARY DATE_OF_J
+-------------------- ---------- ---------
+     10101 Srinivasan
+Comp. Sci.		  65000 01-JAN-07
+
+     32343 El Said
+History 		  60000 01-MAY-07
+
+     45565 Katz
+Comp. Sci.		  75000 01-JUL-07
+
+
+	ID NAME
+---------- --------------------------------------------------
+DEPARTMENT		 SALARY DATE_OF_J
+-------------------- ---------- ---------
+     58583 Califier
+History 		  62000 01-AUG-07
+
+     76543 Singh
+Finance 		  80000 01-SEP-07
+
+     76766 Crick
+Biology 		  72000 01-OCT-07
+
+
+	ID NAME
+---------- --------------------------------------------------
+DEPARTMENT		 SALARY DATE_OF_J
+-------------------- ---------- ---------
+     98345 Kim
+Elec. Eng.		  80000 01-DEC-07
+
+
+7 rows selected.
+
+SQL> select name , (salary * 12) as Annual from faculty_name;
+select name , (salary * 12) as Annual from faculty_name
+                                           *
+ERROR at line 1:
+ORA-00942: table or view does not exist
+
+
+SQL> select name , (salary * 12) as Annual from faculty_info; 
+
+NAME						       ANNUAL
+-------------------------------------------------- ----------
+Srinivasan					       780000
+Wu						      1080000
+Mozart						       480000
+Einstein					      1140000
+El Said 					       720000
+Gold						      1044000
+Katz						       900000
+Califier					       744000
+Singh						       960000
+Crick						       864000
+Brandt						      1104000
+
+NAME						       ANNUAL
+-------------------------------------------------- ----------
+Kim						       960000
+
+12 rows selected.
+
+SQL> select * from faculty_info where regexp_like(name, '^.o&');
+
+no rows selected
+
+SQL> select * from faculty_info where name like ('^.r&');
+
+no rows selected
+
+SQL> select * from faculty_info where name like ('^.r);  
+ERROR:
+ORA-01756: quoted string not properly terminated
+
+
+SQL> select * from faculty_info where name like ('^.r'); 
+
+no rows selected
+
+SQL> select * from faculty_info where name like ('_r%');         
+
+	ID NAME
+---------- --------------------------------------------------
+DEPARTMENT		 SALARY DATE_OF_J
+-------------------- ---------- ---------
+     10101 Srinivasan
+Comp. Sci.		  65000 01-JAN-07
+
+     76766 Crick
+Biology 		  72000 01-OCT-07
+
+     83821 Brandt
+Comp. Sci.		  92000 01-NOV-07
+
+
+SQL>     
+

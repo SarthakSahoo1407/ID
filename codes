@@ -1,0 +1,13 @@
+insert into Prereq(Course_id, Prereq_id) values ('EE-181','PHY-101');
+
+
+insert into Department(Dept_name, Building, Budget) values ('Biology', 'Watson', 90000);
+insert into Department(Dept_name, Building, Budget) values ('Comp. Sci.', 'Taylor', 100000);
+insert into Department(Dept_name, Building, Budget) values ('Elec. Eng.', 'Taylor', 85000);
+insert into Department(Dept_name, Building, Budget) values ('Finance', 'Painter', 120000);
+insert into Department(Dept_name, Building, Budget) values ('History', 'Painter', 50000);
+insert into Department(Dept_name, Building, Budget) values ('Music', 'Packard', 80000);
+insert into Department(Dept_name, Building, Budget) values ('Physics', 'Watson', 70000);
+
+
+create table Department(Dept_name varchar(20), Building varchar(20),Budget number(10));

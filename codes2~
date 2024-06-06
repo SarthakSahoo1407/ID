@@ -1,0 +1,65 @@
+desc Instructor;
+desc Course;
+desc Prereq;
+desc Department;
+desc teaches;
+
+select * from Instructor;
+select * from Course;
+select * from Prereq;
+select * from Department;
+select * from teaches;
+
+select name, dept_name from instructor;
+
+select name, salary from instructor where dept_name = 'Comp. Sci.';
+
+select * from instructor where dept_name = 'Physics' and salary < 90000;
+
+select name from instructor where not dept_name = 'Comp. Sci.';
+
+select distinct dept_name from instructor;
+
+select course_id from teaches where year = 2009 and not semester ='Spring';
+
+select title from course where dept_name='Comp. Sci. ' and not credits= 3;
+
+select * from course order by dept_name desc;
+
+alter table Instructor add date_of_join date;
+
+update Instructor set date_of_join = to_date('2007-01-1', 'YYYY-MM-DD') where id = 10101;
+update Instructor set date_of_join = to_date('2007-02-1', 'YYYY-MM-DD') where id = 12121;
+update Instructor set date_of_join = to_date('2007-03-1', 'YYYY-MM-DD') where id = 15151;
+update Instructor set date_of_join = to_date('2007-04-1', 'YYYY-MM-DD') where id = 22222;
+update Instructor set date_of_join = to_date('2007-05-1', 'YYYY-MM-DD') where id = 32343;
+update Instructor set date_of_join = to_date('2007-06-1', 'YYYY-MM-DD') where id = 33456;
+update Instructor set date_of_join = to_date('2007-07-1', 'YYYY-MM-DD') where id = 45565;
+update Instructor set date_of_join = to_date('2007-08-1', 'YYYY-MM-DD') where id = 58583;
+update Instructor set date_of_join = to_date('2007-09-1', 'YYYY-MM-DD') where id = 76543;
+update Instructor set date_of_join = to_date('2007-10-1', 'YYYY-MM-DD') where id = 76766;
+update Instructor set date_of_join = to_date('2007-11-1', 'YYYY-MM-DD') where id = 83821;
+update Instructor set date_of_join = to_date('2007-12-1', 'YYYY-MM-DD') where id = 98345;
+
+alter table instructor rename column dept_name to department;
+alter table course rename column dept_name to department;
+alter table department rename column dept_name to department;
+
+alter table prereq rename column prerequired to prereq_id;
+
+alter table course rename column course_id to sub_code;
+alter table prereq rename column course_id to sub_code;
+alter table teaches rename column course_id to sub_code;
+
+alter table Instructor modify name varchar2(50);
+
+rename instructor to Faculty_info;
+
+alter table Course modify sub_code varchar2(8);
+
+alter table prereq drop column prerequired;
+
+alter table department rename column building to builder;
+
+
+

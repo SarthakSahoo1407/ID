@@ -1,0 +1,75 @@
+select sub_code, title, credits from course where department in 
+('Physics', 'Music', 'Finance', 'Biology');
+
+/*SUB_CODE TITLE				   CREDITS
+-------- ------------------------------ ----------
+BIO-101  Intro to Biology			 4
+BIO-301  Genetics				 4
+BIO-399  Computational Biology			 3
+FIN-201  Investment Banking			 3
+HIS-351  World History				 3
+PHY-101  Physical Principles			 4
+MU-199	 Music Video Production 		 3
+
+7 rows selected.
+*/
+
+select * from faculty_info where name like 'K%' and salary > 65000;
+
+/* 
+	ID NAME
+---------- ----------------------------------------------DEPARTMENT		 SALARY DATE_OF_J
+-------------------- ---------- ---------
+     45565 Katz
+Comp. Sci.		  75000 01-JUL-07
+
+     98345 Kim
+Elec. Eng.		  80000 01-DEC-07
+
+*/
+
+select name, department, (salary+ (salary* 1.05)+(salary * 0.2)) as GROSS_SALARY, ((salary+ (salary* 1.05)+(salary * 0.2))-(salary*0.3)) as NET_SALARY from faculty_info;
+
+
+select * from faculty_info where salary between 60000 and 80000;
+
+select name from faculty_info where name like '_r%';
+
+select * from faculty_info where department = 'Comp. Sci.'
+order by salary desc;
+
+UPDATE faculty_info SET Salary = Salary * 0.15;
+
+
+UPDATE faculty_info SET Salary = Salary * 0.3 where department = 'Comp. Sci.' and salary < 70000;
+
+select name, (salary * 12) as ANNUAL_SALARY from faculty_info;
+
+update course set title = 'Game Theory' where title = 'Game Design'; 
+
+--delete command
+delete from faculty_info where department='History';
+delete from course where sub_code like 'BIO%';
+
+
+
+select avg(salary) from faculty_info where department = 'Physics';
+
+select department, avg(salary) from faculty_info group by department;
+select name, department,salary from faculty_info where salary = (select max(salary) from faculty_info);
+
+select max(salary) as MAX_SAL from faculty_info;
+
+
+select count(*) from faculty_info where department='Comp. Sci.';
+SELECT title, SUM(CREDITS) AS TOTAL_CREDITS FROM COURSE WHERE DEPARTMENT='Comp. Sci. ';
+
+select count(*) as no_of_instructor, sum(salary) as total_salary, department from faculty_info where department in('Physics' ,'Comp. Sci.') group by department;
+SELECT SUM(CREDITS) AS TOTAL_CREDITS FROM COURSE WHERE DEPARTMENT in ('Comp. Sci. ', 'Biology') ;
+
+select builder, sum(budget) from department group by builder;
+select 
+
+select sum(budget) as total_budget from department where builder ='Wastson';
+select max(salary) from faculty_info;
+
