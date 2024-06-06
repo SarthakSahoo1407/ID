@@ -1,6 +1,4 @@
 insert into Prereq(Course_id, Prereq_id) values ('EE-181','PHY-101');
-
-
 insert into Department(Dept_name, Building, Budget) values ('Biology', 'Watson', 90000);
 insert into Department(Dept_name, Building, Budget) values ('Comp. Sci.', 'Taylor', 100000);
 insert into Department(Dept_name, Building, Budget) values ('Elec. Eng.', 'Taylor', 85000);
