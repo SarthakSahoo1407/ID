@@ -57,7 +57,6 @@ select avg(salary) from faculty_info where department = 'Physics';
 
 select department, avg(salary) from faculty_info group by department;
 select name, department,salary from faculty_info where salary = (select max(salary) from faculty_info);
-
 select max(salary) as MAX_SAL from faculty_info;
 
 
