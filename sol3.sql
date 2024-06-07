@@ -17,7 +17,7 @@ order by salary desc;
 UPDATE faculty_info SET Salary = Salary * 0.15;
 
 
-UPDATE faculty_info SET Salary = Salary * 0.3 where department = 'Comp. Sci.' and salary < 70000;
+UPDATE faculty_info SET Salary = (Salary * 0.03 + salary) where department = 'Comp. Sci.' and salary < 70000;
 
 select name, (salary * 12) as ANNUAL_SALARY from faculty_info;
 
